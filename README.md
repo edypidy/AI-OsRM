@@ -82,15 +82,4 @@ BMD_github/
 ```
 
 ## Citation
-
-If you use this code, please cite:
-
-> Artificial Intelligence–Based Opportunistic Screening for Osteoporosis on Chest Radiographs: Development and Multicenter Validation.
-
-```bibtex
-@article{aibmd,
-  title   = {Artificial Intelligence--Based Opportunistic Screening for Osteoporosis on Chest Radiographs: Development and Multicenter Validation},
-  journal = {},
-  year    = {}
-}
-```
+On the revision process.
