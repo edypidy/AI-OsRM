@@ -2,22 +2,22 @@
 
 Repository for **"Artificial Intelligence–Based Opportunistic Screening for Osteoporosis on Chest Radiographs: Development and Multicenter Validation"**
 
-AI-BMD estimates bone mineral density (BMD) status from routine 2D chest radiographs (CXR). Training follows a two-stage recipe: self-supervised **masked autoencoder (MAE) pretraining**, followed by **supervised finetuning** for osteoporosis classification (3-class or binary) with an optional continuous BMD/T-score regression head.
+AI-BMD estimates bone mineral density (BMD) status from routine 2D chest radiographs (CXR). Training follows a two-stage recipe: self-supervised **masked autoencoder (MAE) pretraining**, followed by **supervised finetuning** for osteoporosis estimation with an optional continuous BMD/T-score regression head.
 
 ## Overview
 
 ```
-CXR image ──▶ MAE pretraining (300 epochs, self-supervised)
+CXR image ──▶ MAE pretraining (self-supervised)
                      │  encoder weights
                      ▼
-             Supervised finetuning ──▶ classification (3-class / binary)
+             Supervised finetuning ──▶ classification
                                        (+ optional T-score regression)
                      │  trained model
                      ▼
                  Inference ──▶ predictions.csv
 ```
 
-- Backbones: `resnet`, `densenet`, `convnext`, `vit`, `swin`.
+- Backbones: `resnet`, `densenet` (optional: `convnext`, `vit`, `swin`).
 - The MAE encoder is reused for finetuning; a lightweight convolutional decoder is used only during pretraining.
 
 ## Installation
