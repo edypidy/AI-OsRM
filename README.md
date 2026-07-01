@@ -1,4 +1,4 @@
-# AI-BMD
+# AI-OsRM, artificial intelligence-based osteoporosis risk prediction model
 
 Repository for **"Artificial Intelligence–Based Opportunistic Screening for Osteoporosis on Chest Radiographs: Development and Multicenter Validation"**
 
