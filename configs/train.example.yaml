@@ -1,0 +1,52 @@
+# Supervised BMD finetuning config.
+# Run: python main.py train --config configs/train.example.yaml
+
+data:
+  manifest_path: "./data/manifest.csv"   # CSV with columns: img_path, label[, t_score, patient_id, split]
+  image_base_dir: ""
+  img_path_key: "img_path"
+  patient_id_key: "patient_id"
+  label_key: "label"                      # integer class id (0..num_classes-1)
+  t_score_key: "t_score"                  # continuous BMD/T-score (needed only if regression: true)
+  split_key: "split"
+
+  # Split behavior (used only when the manifest lacks a split column).
+  generate_split: true
+  train_ratio: 0.7
+  valid_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42
+
+  # Image preprocessing.
+  image_size: 224
+  resize_size: 249
+
+  # Augmentation (train split only).
+  rand_affine_prob: 0.5
+  rand_flip_prob: 0.0
+  affine_degrees: 10.0
+  affine_translate: 0.05
+
+model:
+  model_name: resnet            # resnet | densenet | convnext | vit | swin
+  num_classes: 3                # 3 for 3-class, 2 for binary
+  regression: true              # also predict continuous T-score
+  pretrained_imagenet: true
+
+train:
+  output_dir: "./outputs/train"
+  pretrained_ckpt: "./outputs/mae/encoder_best.pt"  # MAE encoder; leave "" for ImageNet-only init
+  freeze_encoder: false
+  use_gpu: true
+
+  epochs: 100
+  batch_size: 16
+  num_workers: 4
+  lr: 0.0001
+  weight_decay: 0.00001
+  warmup_epochs: 1
+
+  cls_loss_weight: 1.0
+  reg_loss_weight: 1.0
+  save_every: 0
+  seed: 42

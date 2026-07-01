@@ -1,0 +1,42 @@
+# MAE self-supervised pretraining config.
+# Run: python main.py pretrain --config configs/mae.example.yaml
+
+data:
+  manifest_path: "./data/manifest.csv"   # CSV with columns: img_path[, patient_id, split, ...]
+  image_base_dir: ""                      # prefix prepended to img_path (optional)
+  img_path_key: "img_path"
+  patient_id_key: "patient_id"
+  split_key: "split"
+
+  # Split behavior (used only when the manifest lacks a split column).
+  generate_split: true
+  train_ratio: 0.7
+  valid_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42
+
+  # Image preprocessing.
+  image_size: 224
+  resize_size: 249
+
+model:
+  model_name: resnet            # resnet | densenet | convnext | vit | swin
+  num_classes: 3                # unused for MAE, kept for a shared schema
+  regression: false
+  pretrained_imagenet: true     # start MAE from ImageNet weights
+
+mae:
+  output_dir: "./outputs/mae"
+  use_gpu: true
+
+  epochs: 300
+  batch_size: 16
+  num_workers: 4
+  lr: 0.00015
+  weight_decay: 0.05
+  warmup_epochs: 10
+
+  mask_ratio: 0.75
+  patch_size: 16
+  save_every: 50
+  seed: 42

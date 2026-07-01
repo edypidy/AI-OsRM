@@ -1,0 +1,35 @@
+# Inference config.
+# Run: python main.py infer --config configs/infer.example.yaml
+
+data:
+  manifest_path: "./data/manifest.csv"
+  image_base_dir: ""
+  img_path_key: "img_path"
+  patient_id_key: "patient_id"
+  label_key: "label"
+  t_score_key: "t_score"
+  split_key: "split"
+
+  generate_split: true
+  train_ratio: 0.7
+  valid_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42
+
+  image_size: 224
+  resize_size: 249
+
+model:
+  model_name: resnet            # must match the trained checkpoint
+  num_classes: 3
+  regression: true
+  pretrained_imagenet: false
+
+infer:
+  output_dir: "./outputs/infer"
+  checkpoint_path: "./outputs/train/best.pt"
+  use_gpu: true
+
+  batch_size: 16
+  num_workers: 4
+  split: "test"
